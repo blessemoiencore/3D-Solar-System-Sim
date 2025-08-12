@@ -110,18 +110,6 @@ saturn = Body("Saturn", pos=[9.582 * AU, 0, 0], v_i=[0, 9690, 0], mass=5.683e26,
 uranus = Body("Uranus", pos=[19.218 * AU, 0, 0], v_i=[0, 6810, 0], mass=8.681e25, radius=2.5362e7)
 neptune = Body("Neptune", pos=[30.11 * AU, 0, 0], v_i=[0, 5430, 0], mass=1.024e26, radius=2.4622e7)
 
-'''
-stored_positions = Body.update_all(3600)
-x_values = [[None for _ in Body.bodies] for _ in range(len(stored_positions))]
-y_values = [[None for _ in Body.bodies] for _ in range(len(stored_positions))]
-z_values = [[None for _ in Body.bodies] for _ in range(len(stored_positions))]
-
-for i, ss in enumerate(stored_positions):
-    for j, body in enumerate(ss):
-        x_values[i][j] = body[0]
-        y_values[i][j] = body[1]
-        z_values[i][j] = body[2]
-'''
 
 fig = plt.figure(figsize = (10, 10))
 ax = fig.add_subplot(111, projection='3d')
@@ -153,49 +141,6 @@ scale_factor = 1e-6
 names = [body.name for body in Body.bodies]
 sizes = [body.radius * scale_factor for body in Body.bodies]
 
-'''
-points = []
-for i, name in enumerate(names):
-    color = colors.get(name, 'black')
-
-    x = x_values[0][i]
-    y = y_values[0][i]
-    z = z_values[0][i]
-
-    scatters = ax.scatter([x], [y], [z], s= sizes[i], c = color, label = name)
-    points.append(scatters)
-
-trails = []
-for i, name in enumerate(names):
-    #plot returns list with line2D object, comma upacks and takes the object
-    line, = ax.plot([], [], [], '-', color = colors.get(name, 'black'), alpha = 0.5,) 
-    trails.append(line) #line is now line2D object
-
-ax.legend()
-
-def update(frame):
-    for i, point in enumerate(points):
-        x = x_values[frame][i]
-        y = y_values[frame][i]
-        z = z_values[frame][i]
-
-        trail_x = [x_values[f][i] for f in range(frame + 1)]
-        trail_y = [y_values[f][i] for f in range(frame + 1)]
-        trail_z = [z_values[f][i] for f in range(frame + 1)]
-
-        trails[i].set_data(trail_x, trail_y)
-        trails[i].set_3d_properties(trail_z)
-
-        point._offsets3d = ([x], [y], [z])
-
-
-    return points + trails
-
-ani = FuncAnimation(fig, update, frames=range(0, len(x_values), 10), interval=50, blit=False)
-#ani.save("3DSS_test2.mp4", fps=15, dpi=72)
-
-plt.show()
-'''
 
 #AI
 
